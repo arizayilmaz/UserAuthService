@@ -4,6 +4,7 @@ import com.aryil.api.auth.dto.LoginRequest;
 import com.aryil.api.auth.dto.LoginResponse;
 import com.aryil.api.auth.dto.RegisterRequest;
 import com.aryil.api.auth.dto.RegisterResponse;
+import com.aryil.api.auth.exception.EmailAlreadyExistsException;
 import com.aryil.api.auth.security.JwtUtil;
 import com.aryil.api.user.entity.User;
 import com.aryil.api.user.mapper.UserMapper;
@@ -23,7 +24,7 @@ public class AuthService {
 
     public RegisterResponse register(RegisterRequest request) {
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            throw new RuntimeException("Email already in use.");
+            throw new EmailAlreadyExistsException("Email already in use.");
         }
 
         User user = User.builder()
