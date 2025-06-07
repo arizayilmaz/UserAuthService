@@ -8,7 +8,7 @@
 	},
 	"item": [
 		{
-			"name": "Register",
+			"name": "Auth – Register",
 			"event": [
 				{
 					"listen": "test",
@@ -53,7 +53,7 @@
 			"response": []
 		},
 		{
-			"name": "Login",
+			"name": "Auth – Login",
 			"event": [
 				{
 					"listen": "test",
@@ -98,7 +98,114 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "Books – Create",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \"title\":\"Yüzüklerin Efendisi\", \r\n    \"author\":\"J.R.R. Tolkien\", \r\n    \"type\":\"BOOK\" \r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Library – Add Book",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QGV4YW1wbGUuY29tIiwiaWF0IjoxNzQ5MzM3OTY2LCJleHAiOjE3NDkzNDE1NjZ9.U26e83tk8NdNtzDnTjt-YFLhxpOW4dDqB_i-MxXkAqs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookId\": \"5feb9fac-f983-4eda-9120-55296b7a79db\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/me/library",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"me",
+						"library"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Library – List",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Harry Potter ve Felsefe Taşı\",\r\n  \"author\": \"J.K. Rowling\",\r\n  \"type\": \"BOOK\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/me/library",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"me",
+						"library"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Books – List",
 			"request": {
 				"method": "GET",
 				"header": []
